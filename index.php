@@ -1,3 +1,3 @@
 <?php
-    header("Location: ./sample-page.php"); exit;
+    header("Location: ./example.php"); exit;
 ?>

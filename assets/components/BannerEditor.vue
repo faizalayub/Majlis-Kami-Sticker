@@ -1,5 +1,5 @@
 <template>
-    <div ref="container" class="container" id="tui-image-editor">asd</div>
+    <div ref="container" id="tui-image-editor">asd</div>
 </template>
 
 <script>
@@ -12,8 +12,8 @@ export default {
     data: () => ({
         themeStyle: {
             'common.bi.image': 'https://majliskami.my/logo.png',
-            'common.bisize.width': '60px',
-            'common.bisize.height': '60px',
+            'common.bisize.width': '0px',
+            'common.bisize.height': '0px',
             'common.bisize.padding': '0',
             'common.backgroundImage': './img/bg.png',
             'common.backgroundColor': '#fff',
@@ -21,22 +21,22 @@ export default {
 
             // header
             'header.backgroundImage': 'none',
-            'header.backgroundColor': 'transparent',
-            'header.border': '0px',
+            'header.backgroundColor': 'var(--bs-body-bg)',
+            'header.borderTop': 'solid 1px var(--bs-gray-200)',
+            'header.borderBottom': 'solid 1px var(--bs-gray-200)',
+            'header.borderRight': 'solid 1px var(--bs-gray-200)',
 
             // load button
-            'loadButton.backgroundColor': '#fff',
-            'loadButton.border': '1px solid var(--surface-border)',
-            'loadButton.color': '#222',
-            'loadButton.fontFamily': "'Noto Sans', sans-serif",
-            'loadButton.fontSize': '12px',
+            'loadButton.backgroundColor': 'var(--bs-gray-200)',
+            'loadButton.border': '1px solid var(--bs-gray-300)',
+            'loadButton.color': 'var(--bs-gray-700)',
+            'loadButton.fontSize': '14px',
 
             // download button
-            'downloadButton.backgroundColor': '#fdba3b',
-            'downloadButton.border': '1px solid #fdba3b',
+            'downloadButton.backgroundColor': 'var(--bs-blue)',
+            'downloadButton.border': '1px solid var(--bs-blue)',
             'downloadButton.color': '#fff',
-            'downloadButton.fontFamily': "'Noto Sans', sans-serif",
-            'downloadButton.fontSize': '12px',
+            'downloadButton.fontSize': '14px',
 
             // main icons
             'menu.normalIcon.color': '#8a8a8a',
@@ -103,7 +103,7 @@ export default {
                 menu: ['text'],
                 initMenu: 'text',
                 theme: this.themeStyle,
-                menuBarPosition: 'bottom',
+                menuBarPosition: 'left',
             },
             selectionStyle: {
                 cornerSize: 20,
@@ -122,5 +122,20 @@ export default {
 
     .tui-image-editor-container .tui-image-editor-header-logo{
         padding: 0 1em !important;
+    }
+
+    .tui-image-editor-menu {
+        background: var(--bs-body-bg);
+        border-left: solid 1px var(--bs-gray-200);
+        border-top: solid 1px var(--bs-gray-200);
+        border-bottom: solid 1px var(--bs-gray-200);
+    }
+
+    .tui-image-editor-container .tui-image-editor-main{
+        border-left: solid 1px var(--bs-gray-200);
+    }
+
+    .tui-image-editor-main-container{
+        border: none !important;
     }
 </style>
