@@ -1,32 +1,43 @@
-export default function(filename = 'canvas'){
+const fakeAnchor = function({ data, name }){
+    const link = document.createElement('a');
+
+    link.download = name;
+    link.href = data;
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    document.body.removeChild(link);
+    
+    link.remove();
+};
+
+export default function(filename = null){
     const { stage } = this;
     const { jsPDF } = this.$library;
 
-    const pdf = new jsPDF('p', 'px', [stage.width(), stage.height()]);
+    const random = (Math.random().toString(36).substring(2, 15) + Math.random().toString(23).substring(2, 5));
+    const dataURL = stage.toDataURL({ pixelRatio: 3 });
+    const $stageWidth = this.stage.width();
+    const $stageHeight = this.stage.height();
     
-    pdf.setTextColor('#000000');
-
-    stage.find('Text').forEach((text) => {
-        const size = text.fontSize() / 0.75; // convert pixels to points
-
-        pdf.setFontSize(size);
-
-        pdf.text(text.text(), text.x(), text.y(), {
-            baseline: 'top',
-            angle: -text.getAbsoluteRotation(),
-        });
+    fakeAnchor({
+        data: dataURL, 
+        name: `${ (filename ?? random) }.jpg`
     });
 
-    // then put image on top of texts (so texts are not visible)
-    pdf.addImage(
-        stage.toDataURL({ pixelRatio: 2 }),
-        0,
-        0,
-        stage.width(),
-        stage.height()
-    );
+    // const doc = new jsPDF();
+    // const pageWidth = doc.internal.pageSize.width;
+    // const pageHeight = doc.internal.pageSize.height;
+    // const imgWidth = 100;
+    // const imgHeight = 200;
 
-    pdf.save(`${ filename }.pdf`);
+    // const x = (pageWidth - imgWidth) / 2;
+    // const y = (pageHeight - imgHeight) / 2;
 
-    return pdf;
+    // doc.addImage(dataURL, 'JPEG', x, y, imgWidth, imgHeight);
+    // doc.save('output.pdf');
+
+    return dataURL;
 }

@@ -22,42 +22,42 @@ export default function(){
         align: 'center',
         lineHeight: 1.4,
         x: 0,
-        y: 0,
+        y: 0
     };
 
     const $title = new Konva.Text({
         ...$config,
         text: 'Walimatulurus',
         fontFamily: 'mirage',
-        fontSize: 20,
+        fontSize: 30,
     });
 
     const $couple = new Konva.Text({
         ...$config,
-        text: 'Faizal\n&\nKhairul',
+        text: 'Faiqah\n&\nKhairul',
         fontFamily: 'afterglow',
-        fontSize: 24,
+        fontSize: 35,
     });
 
     const $daytext = new Konva.Text({
         ...$config,
         text: 'Jumaat',
         fontFamily: 'mirage',
-        fontSize: 18,
+        fontSize: 28,
     });
 
     const $daydate = new Konva.Text({
         ...$config,
         text: '13',
         fontFamily: 'afterglow',
-        fontSize: 20,
+        fontSize: 38,
     });
 
     const $footer = new Konva.Text({
         ...$config,
-        text: 'Januari, 2023\n13 RabiulAwwal 1433H\nDewan Antalusia, Seksyen 7, Shah Alam, Selangor 7, Shah Alam, Selangor',
+        text: 'Januari, 2023\n13 RabiulAwwal 1433H\n\nDewan Antalusia, Seksyen 7, Shah Alam, Selangor 7, Shah Alam, Selangor',
         fontFamily: 'mirage',
-        fontSize: 18,
+        fontSize: 28,
     });
 
     //# Register To Layer
@@ -80,6 +80,10 @@ export default function(){
     $daytext.y($h.title + $h.couple + $base);
     $daydate.y($h.title + $h.couple + $h.daytext + $base);
     $footer.y($h.title + $h.couple + $h.daytext + $h.daydate + $base);
+
+
+    console.log($footer.width());
+    //# Long text wrap to next line, dependan design width
     
     //# Setting Font Size
     // information.on('textChange', function(){

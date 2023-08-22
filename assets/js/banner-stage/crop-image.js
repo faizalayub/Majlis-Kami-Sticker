@@ -62,8 +62,8 @@ function getCrop(image, size, clipPosition = 'center-middle'){
     };
 }
 
-export default function(pos){
-    const img = this.layer.findOne('.image');
+export default function({ pos, layer }){
+    const img = layer.findOne('.image');
 
     img.setAttr('lastCropUsed', pos);
 

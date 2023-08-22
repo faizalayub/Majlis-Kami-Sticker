@@ -4,18 +4,16 @@
 
         <br>
 
-        <center>
+        <div class="w-100" align="center">
             <button @click="download">Export as PDF</button>
-        </center>
+        </div>
     </div>
 </template>
 
 <script>
 import addText from './add-text';
 import addImage from './add-image';
-import cropImage from './crop-image';
 import exportPDF from './export-pdf';
-import imageTransformer from './image-transformer';
 
 export default {
     data: () => ({
@@ -30,17 +28,13 @@ export default {
         return {
             addText,
             addImage,
-            cropImage,
-            imageTransformer,
             exportPDF
         }
     },
     methods: {
         download: function(){
-            const filename = (Math.random().toString(36).substring(2, 15) + Math.random().toString(23).substring(2, 5));
-
-            this.exportPDF(filename);
-        }
+            this.exportPDF();
+        },
     },
     mounted: async function(){
         const { stagecanvas } = this.$refs;
@@ -48,8 +42,8 @@ export default {
 
         const instance = new Konva.Stage({
             container: stagecanvas,
-            height: 720,  // 24 inches * 300 DPI
-            width: 288, // 60 inches * 300 DPI
+            height: 2400,  // 60 inches * 40 PPI
+            width: 960, // 24 inches * 40 PPI
         });
 
         const drawingLayer = new Konva.Layer();
@@ -73,9 +67,6 @@ export default {
         //# Init
         this.instances.image = await this.addImage();
         this.instances.text = this.addText();
-
-        //# Add Transformer
-        // this.imageTransformer(image);
     }
 }
 </script>

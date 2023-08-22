@@ -1,8 +1,8 @@
-export default function(img){
-    const { Konva } = this.$library;
-    
+import cropImage from './crop-image';
+
+export default function ({ Konva, instance, layer }){
     const tr = new Konva.Transformer({
-        nodes: [img],
+        nodes: [instance],
         keepRatio: false,
         boundBoxFunc: (oldBox, newBox) => {
             if (newBox.width < 10 || newBox.height < 10) {
@@ -13,19 +13,22 @@ export default function(img){
         },
     });
     
-    img.on('transform', () => {
+    instance.on('transform', () => {
         // Reset scale on transform
-        img.setAttrs({
+        instance.setAttrs({
             scaleX: 1,
             scaleY: 1,
-            width: img.width() * img.scaleX(),
-            height: img.height() * img.scaleY(),
+            width: instance.width() * instance.scaleX(),
+            height: instance.height() * instance.scaleY(),
         });
         
-        this.cropImage(img.getAttr('lastCropUsed'));
+        cropImage({
+            pos: instance.getAttr('lastCropUsed'),
+            layer
+        });
     });
     
-    this.layer.add(tr);
+    layer.add(tr);
 
     return tr;
 }
